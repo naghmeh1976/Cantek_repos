@@ -1,12 +1,70 @@
+--create Book_Authors table 
+		
+drop table if exists Book_Authors cascade;
+create table Book_Authors
+             (
+			 Author_ID serial primary Key not null,
+		
+			 Author_Name varchar(50) not null
+			 )
+
+--insert value into Book_Authors
+
+insert into Book_Authors (Author_Name)
+     values ('Migule de Carvantes'),
+	        ( 'Lewis Carroll'),
+			( 'Mark Twain'),
+			( 'Robert Louis Stevenson'),
+			( 'Jane Austen'),
+			( 'Emily Bronte'),
+			( 'Charlotte Bronte'),
+			( 'Herman Melville'),
+			( 'Nathaniel Hawthorne'),
+			( 'Jonathan Swift'),
+			('John Bunyan'),
+			( 'Charles Dickens'),
+			('Louisa May Alcott'),
+			( 'J.R.R. Tolkien'),
+			('Mary Shelley'),
+			( 'Harriet Beecher Stowe'),
+			( 'Fyodor Dostoyevsky'),
+			( 'Gustave Flaubert'),
+			( 'Bram Stoker'),
+			( 'Alexandre Dumas'),
+			( 'Aldous Huxley'),
+			( 'Leo Tolstoy'),
+			( 'Harper Lee'),
+			( 'L. Frank Baum'),
+			( 'Victor Hugo'),
+			( 'Frances Hodgson Burnett'),
+			( 'George Orwell'),
+			( 'F. Scott Fitzgerald'),
+			('Antoine de Saint-Exupéry'),
+			( 'Jack London'),
+			( 'Jules Verne'),
+			( 'Kenneth Grahame'),
+			( 'Oscar Wilde'),
+			( 'John Steinbeck'),
+			( 'James Fenimore Cooper'),
+			( 'Thomas Hardy'),
+			( 'J.K. Rowling'),
+			('Johanna Spyri'),
+			( 'James Joyce'),
+			( 'Arthur Conan Doyle'),
+			( 'Ernest Hemingway'),
+			('Agatha Christie'),
+			( 'william shakespeare');
+			
+select*from Book_Authors 
 
 
 --create books table
 
-drop table if exists Books;
+drop table if exists Books CASCADE;
 create table Books(
 	Book_ID serial PRIMARY KEY,
 	Book_Title varchar(100) not null,
-	Author_id int,
+	Author_ID int REFERENCES Book_Authors,
 	Publisher_Name varchar(100)not null
 );
 
@@ -77,73 +135,14 @@ INSERT INTO Books(Book_Title,Author_id,Publisher_Name)
 		 select * from Books;
 
 
---create Book_Authors table 
-		
-drop table if exists Book_Authors;
-create table Book_Authors
-             (
-			 Author_ID serial not null,
-		
-			 Author_Name varchar(50) not null
-			 )
-
---insert value into Book_Authors
-
-insert into Book_Authors (Author_Name)
-     values ('Migule de Carvantes'),
-	        ( 'Lewis Carroll'),
-			( 'Mark Twain'),
-			( 'Robert Louis Stevenson'),
-			( 'Jane Austen'),
-			( 'Emily Bronte'),
-			( 'Charlotte Bronte'),
-			( 'Herman Melville'),
-			( 'Nathaniel Hawthorne'),
-			( 'Jonathan Swift'),
-			( 'Charles Dickens'),
-			('Louisa May Alcott'),
-			( 'J.R.R. Tolkien'),
-			('Mary Shelley'),
-			( 'Harriet Beecher Stowe'),
-			( 'Fyodor Dostoyevsky'),
-			( 'Gustave Flaubert'),
-			( 'Bram Stoker'),
-			( 'Alexandre Dumas'),
-			( 'Aldous Huxley'),
-			( 'Leo Tolstoy'),
-			( 'Harper Lee'),
-			( 'L. Frank Baum'),
-			( 'Victor Hugo'),
-			( 'Frances Hodgson Burnett'),
-			( 'George Orwell'),
-			( 'F. Scott Fitzgerald'),
-			('Antoine de Saint-Exupéry'),
-			( 'Jack London'),
-			( 'Jules Verne'),
-			( 'Kenneth Grahame'),
-			( 'Oscar Wilde'),
-			( 'John Steinbeck'),
-			( 'James Fenimore Cooper'),
-			( 'Thomas Hardy'),
-			( 'J.K. Rowling'),
-			('Johanna Spyri'),
-			( 'James Joyce'),
-			( 'Arthur Conan Doyle'),
-			( 'Ernest Hemingway'),
-			('Agatha Christie'),
-			( 'william shakespeare');
-			
-select*from Book_Authors 
-
-
 --Create TABLE Book_Copies TABLE
 
-drop table if EXISTS Book_Copies
+drop table if EXISTS Book_Copies cascade
 
 Create TABLE Book_Copies(
     Copies_id serial primary key,
-    book_id int not null, 
-    branch_id INT,
+    book_id int references Book not null, 
+    branch_id INT  ,
     No_of_copies INT NOT NULL
 )
 
@@ -241,7 +240,7 @@ select * from Library_Branches
 
 
 --Create  Books_Borrowers table
-drop table if EXISTS Books_Borrowers
+drop table if EXISTS Books_Borrowers cascade
 
 Create table Books_Borrowers(
 	Card_No int ,
@@ -378,7 +377,7 @@ create table Book_Loans
 	(50, 2, 0976, 143090816, '2023-01-10' , '2023-01-17' );
  
 
-select *from Book_Loans
+select *from Book_Loans 
 
 
 
